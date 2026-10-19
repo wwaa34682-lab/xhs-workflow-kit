@@ -1,0 +1,52 @@
+# 预设：产品主体（干净底色 + 产品抠图做巨物主体 + 标题在上）。餐饮、咖啡茶饮、零售、预包装食品先用它。
+# 需要一张产品抠图 PNG（透明底），放到 data/raw/product.png；没有抠图时自动不画主体，退化成极简版并提醒。
+template:
+  name: 产品主体
+reference:                     # 参考图拆解（硬规则：没填完 render_post.py 不出图）。清单见 templates/参考图拆解清单.md
+  images: []                   # 参考图放 data/refs/<稿件ID>/，这里列文件名，如 [ref_01.jpg]。只作参考，不进成品，不商用原图
+  breakdown:
+    版式: 【待拆解】
+    字体: 【待拆解】
+    调色: 【待拆解】
+    主体: 【待拆解】
+    装饰: 【待拆解】
+    文字位置: 【待拆解】
+  kept: 【待拆解】              # 保留了参考图的什么
+  changed: 【待拆解】           # 按本品牌改了什么（颜色、主体、节点、文字、照片）
+  iterations: []               # 每轮用户反馈和对应改动：- {round: 1, feedback: "原话", change: "改了什么"}
+canvas: [1080, 1440]
+palette:
+  bg_top: "@light"
+  bg_bottom: "#EFE6D8"
+  ink: "@dark"
+  paper: "@light"
+  highlight: "@accent"
+  doodle: "@dark"
+styles:
+  on_bg_title: {fill: "@dark", stroke_width: 0, shadow: false}
+  on_bg:       {fill: "@dark", stroke_width: 0, shadow: false}
+  on_subject:  {fill: "@dark", stroke: "@light", stroke_width: 6, shadow: true}
+  emphasis:    {fill: "@accent", stroke: "@light", stroke_width: 4, shadow: false}
+  small:       {fill: "@dark", stroke_width: 0, shadow: false}
+cover:
+  background: {type: gradient, top: "@bg_top", bottom: "@bg_bottom", texture: 0.5}
+  subject: {type: image, path: data/raw/product.png, width: 820, center: [540, 900], painterly: false}
+  doodles: {enabled: true, color: "@doodle", items: [sparkle, sparkle, star], zones: [[60, 40, 1020, 140]]}
+  route: {enabled: false}
+  slots:
+    title:    {y: 200, font: title, size: 112, style: on_bg_title}
+    subtitle: {y: 360, font: body, size: 36, style: on_bg}
+    offer:    {y: 440, font: body, size: 36, style: on_bg, emph_font: number, emph_size: 40, emph_style: emphasis}   # 价格不放大（SL-G14）
+    cta:      {y: 1300, font: body, size: 36, style: on_subject}
+    brand:    {y: 1370, font: body, size: 26, style: small}
+inner:
+  background: {type: gradient, top: "@bg_top", bottom: "@bg_bottom", texture: 0.4}
+  doodles: {enabled: false}
+  frame: polaroid
+  photo_box: [90, 280, 990, 1200]
+  slots:
+    title:   {y: 120, font: title, size: 80, style: on_bg_title}
+    caption: {y: 1230, font: body, size: 40, style: on_bg, line_height: 56}
+variants:                     # 一次只改一个变量：B 只换背景色系（米白 → 品牌强调色浅底）
+  B:
+    palette: {bg_top: "#FCE9DD", bg_bottom: "#F6CDB4"}

@@ -1,0 +1,13 @@
+name: 餐饮与食品（含咖啡茶饮、烘焙、预包装食品）
+regulated: false
+banned: [100%, 保证, 必定, 无效退款, 第一品牌, 全网第一, 最便宜, 最好吃, 治病, 养生功效, 降血糖, 降血压, 抗癌, 减肥, 排毒, 零添加, 纯天然]
+allow: [第一次, 第一口, 第一杯, 第一站]
+banned_patterns:
+  - '(?:治疗|预防|调理).{0,4}(?:病|症|三高)'
+  - '(?:有机|无添加|零添加|纯天然)(?!.*认证)'
+  - '(?:全国|全网|全市)(?:第一|最)'
+required_disclaimers: []
+qualification_terms: [有机, 认证, 非遗, 老字号, 获奖, 米其林, 黑珍珠, 必吃榜, 授权]
+story_rule: label
+disable_rules: []
+extra_required: []

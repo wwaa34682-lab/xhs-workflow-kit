@@ -1,0 +1,11 @@
+# 必装（所有步骤）
+numpy>=1.24
+Pillow>=10.0
+PyYAML>=6.0
+openpyxl>=3.1
+# 可选：油画质感更好（render 时自动启用）
+# opencv-contrib-python-headless>=4.8
+# 可选：换脸/打码（scripts/face_swap.py），见 scripts/face_swap.py 顶部说明和许可提示
+# opencv-python-headless>=4.8
+# insightface>=0.7.3
+# onnxruntime>=1.16

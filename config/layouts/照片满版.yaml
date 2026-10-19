@@ -1,0 +1,54 @@
+# 预设：照片满版（用户自己的实拍铺满首图 + 上方大标题 + 底部信息条）。美业、健身、教育、本地生活这类“人和空间”就是卖点的行业先用它。
+# 把首图照片放到 data/raw/cover.jpg（自有实拍、有授权、人脸按 face_policy 处理）；没有照片时退化成纯色底并提醒。
+template:
+  name: 照片满版
+reference:                     # 参考图拆解（硬规则：没填完 render_post.py 不出图）。清单见 templates/参考图拆解清单.md
+  images: []                   # 参考图放 data/refs/<稿件ID>/，这里列文件名，如 [ref_01.jpg]。只作参考，不进成品，不商用原图
+  breakdown:
+    版式: 【待拆解】
+    字体: 【待拆解】
+    调色: 【待拆解】
+    主体: 【待拆解】
+    装饰: 【待拆解】
+    文字位置: 【待拆解】
+  kept: 【待拆解】              # 保留了参考图的什么
+  changed: 【待拆解】           # 按本品牌改了什么（颜色、主体、节点、文字、照片）
+  iterations: []               # 每轮用户反馈和对应改动：- {round: 1, feedback: "原话", change: "改了什么"}
+canvas: [1080, 1440]
+palette:
+  bg_top: "@primary"
+  bg_bottom: "@dark"
+  ink: "@dark"
+  paper: "@light"
+  highlight: "@accent"
+  doodle: "@light"
+styles:
+  on_bg_title: {fill: "@light", stroke: "@dark", stroke_width: 6, shadow: true, shadow_alpha: 0.45}
+  on_bg:       {fill: "@light", stroke: "@dark", stroke_width: 3, shadow: true}
+  on_subject:  {fill: "@light", stroke: "@dark", stroke_width: 5, shadow: true}
+  emphasis:    {fill: "@light", stroke: "@accent", stroke_width: 5, shadow: true}
+  small:       {fill: "@light", stroke: "@dark", stroke_width: 2, shadow: false}
+cover:
+  background: {type: image, path: data/raw/cover.jpg, top: "@bg_top", bottom: "@bg_bottom", texture: 0.0}
+  subject: {type: none}
+  doodles: {enabled: false}
+  route: {enabled: false}
+  slots:
+    title:    {y: 160, font: title, size: 112, style: on_bg_title}
+    subtitle: {y: 320, font: body, size: 36, style: on_bg}
+    offer:    {y: 1180, font: body, size: 36, style: on_bg, emph_font: number, emph_size: 40, emph_style: emphasis}   # 价格不放大（SL-G14）
+    cta:      {y: 1250, font: body, size: 36, style: on_bg}
+    brand:    {y: 1360, font: body, size: 26, style: small}
+inner:
+  background: {type: gradient, top: "@light", bottom: "@light", texture: 0.4}
+  doodles: {enabled: false}
+  frame: polaroid
+  photo_box: [90, 280, 990, 1200]
+  styles: {}
+  slots:
+    title:   {y: 120, font: title, size: 80, style: on_bg_title}
+    caption: {y: 1230, font: body, size: 40, style: on_bg, line_height: 56}
+variants:                     # 一次只改一个变量：B 只换首图照片（放 data/raw/cover_B.jpg），文字和版式不动
+  B:
+    cover:
+      background: {type: image, path: data/raw/cover_B.jpg, top: "@bg_top", bottom: "@bg_bottom", texture: 0.0}

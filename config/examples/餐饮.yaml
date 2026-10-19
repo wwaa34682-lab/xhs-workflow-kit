@@ -1,0 +1,31 @@
+# 【虚构示例】餐饮行业 · 名字、价格、门店都是编的
+industry: 餐饮（面馆）
+compliance: {profile: 餐饮食品}
+city: 示例市
+brand:
+  name: 山野面馆（虚构）
+  colors: {primary: "#8A3B1F", accent: "#E9A23B", dark: "#2B1A12", light: "#FFF6E8"}
+  fonts:
+    dir: fonts
+    title:  {name: 站酷快乐体, file: ZCOOLKuaiLe-Regular.ttf}
+    body:   {name: 霞鹜文楷 Medium, file: LXGWWenKai-Medium.ttf}
+    number: {name: 得意黑, file: SmileySans-Oblique.ttf}
+offer:
+  - name: 招牌牛肉面双人套餐
+    price_text: 68元/2人
+    duration: 午市 11:00-14:00 可用
+    includes: [2 碗招牌面, 2 份小菜, 2 杯酸梅汤]
+    validity: 【待业务确认】          # 示范：没确认的保持占位
+locations:
+  - {name: 老街店, short: 老街店}
+  - {name: 港湾店, short: 港湾店}
+  - {name: 新城店, short: 新城店}
+audience: {who: 附近上班族和周末逛街的情侣, pains: [排队久, 怕踩雷], motives: [吃得实在, 拍照好看]}
+accounts: [{name: 山野面馆（虚构）, type: 企业号, role: 种草+转化, organic_traffic: 有}]
+juguang: {has: false, account_name: "", lead_field: auto, min_spend_for_rank: 100, min_impressions_for_ctr: 1000}
+collection: {mode: browser, dedicated_account_note: "运营组备用机上的研究小号（虚构）", is_main_account: false, user_accepts_platform_risk: true, keywords: [示例市面馆, 示例市牛肉面, 示例市午饭], max_posts_per_session: 30, pause_seconds: [8, 20], bench_window_days: 365, min_intent_users: 11}
+reviewer: {name: 示例主理人（虚构）, role: 老板}
+face_policy: {mode: blur, real_face_allowed_roles: [店员本人], ai_label_required: true}
+content_rules: {scenario_label: "*本文为情景演绎", comment_keyword: 想吃, banned_words: [最好吃, 全网第一, 100%], banned_words_confirmed: true, allowed_claims: [无]}
+# 模板改编建议（写进 layout.yaml）：cover.subject 用 {type: image, path: data/raw/bowl_cutout.png}（自有实拍抠图），
+# route 串 3 家店；没开聚光 → 第 8 步只用 --organic 回收自然流量。

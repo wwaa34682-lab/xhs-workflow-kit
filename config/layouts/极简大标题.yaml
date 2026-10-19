@@ -1,0 +1,59 @@
+# 预设：极简大标题（纯色/柔和渐变底 + 超大标题 + 少量信息）。没有好照片、没有产品抠图，或者医疗、金融这类要克制的行业先用它。
+# 参考图改编参数（第 5 步）：先按参考图填 reference，再调下面的参数。颜色可写 #RRGGBB、@palette名、@primary/@accent/@dark/@light。
+template:
+  name: 极简大标题
+reference:                     # 参考图拆解（硬规则：没填完 render_post.py 不出图）。清单见 templates/参考图拆解清单.md
+  images: []                   # 参考图放 data/refs/<稿件ID>/，这里列文件名，如 [ref_01.jpg]。只作参考，不进成品，不商用原图
+  breakdown:
+    版式: 【待拆解】
+    字体: 【待拆解】
+    调色: 【待拆解】
+    主体: 【待拆解】
+    装饰: 【待拆解】
+    文字位置: 【待拆解】
+  kept: 【待拆解】              # 保留了参考图的什么
+  changed: 【待拆解】           # 按本品牌改了什么（颜色、主体、节点、文字、照片）
+  iterations: []               # 每轮用户反馈和对应改动：- {round: 1, feedback: "原话", change: "改了什么"}
+canvas: [1080, 1440]
+palette:
+  bg_top: "@light"
+  bg_bottom: "@light"
+  ink: "@dark"
+  paper: "@light"
+  highlight: "@accent"
+  doodle: "@primary"
+styles:
+  on_bg_title: {fill: "@dark", stroke_width: 0, shadow: false}
+  on_bg:       {fill: "@dark", stroke_width: 0, shadow: false}
+  on_subject:  {fill: "@dark", stroke_width: 0, shadow: false}
+  emphasis:    {fill: "@primary", stroke_width: 0, shadow: false}
+  small:       {fill: "@dark", stroke_width: 0, shadow: false}
+cover:
+  background: {type: gradient, top: "@bg_top", bottom: "@bg_bottom", texture: 0.35}
+  subject: {type: none}
+  doodles: {enabled: false}
+  route: {enabled: false}
+  slots:
+    title:    {y: 330, font: title, size: 128, style: on_bg_title, line_height: 160}
+    subtitle: {y: 690, font: body, size: 40, style: on_bg}
+    headline: {y: 900, font: title, size: 60, style: on_bg}
+    offer:    {y: 1000, font: body, size: 38, style: on_bg, emph_font: number, emph_size: 42, emph_style: emphasis}   # 价格不放大（SL-G14）
+    cta:      {y: 1080, font: body, size: 38, style: on_bg}
+    footnote: {y: 1300, font: body, size: 24, style: small}
+    brand:    {y: 1360, font: body, size: 28, style: on_bg}
+inner:
+  background: {type: gradient, top: "@bg_top", bottom: "@bg_bottom", texture: 0.3}
+  doodles: {enabled: false}
+  frame: rounded
+  photo_box: [90, 260, 990, 1180]
+  slots:
+    title:   {y: 110, font: title, size: 80, style: on_bg_title}
+    caption: {y: 1230, font: body, size: 40, style: on_bg, line_height: 56}
+variants:                     # 一次只改一个变量：B 只把底色换成品牌主色（文字反白），版式不动
+  B:
+    palette: {bg_top: "@primary", bg_bottom: "@primary"}
+    styles:
+      on_bg_title: {fill: "@light", stroke_width: 0, shadow: false}
+      on_bg:       {fill: "@light", stroke_width: 0, shadow: false}
+      emphasis:    {fill: "@light", stroke_width: 0, shadow: false}
+      small:       {fill: "@light", stroke_width: 0, shadow: false}

@@ -1,0 +1,10 @@
+name: 通用（不受特殊监管的行业）
+regulated: false
+banned: [100%, 保证, 必定, 无效退款, 第一品牌, 全网第一, 最便宜, 史上最低]
+allow: [第一次, 第一步, 第一节, 第一口, 第一杯, 第一天, 第一眼, 第一站]
+banned_patterns: ['(?:全国|全网|全市|行业)(?:第一|领先|最好)', '国家级(?!非遗)', '最(?:好|佳|优|强)的']
+required_disclaimers: []
+qualification_terms: [认证, 授权, 官方, 国家级, 获奖, 冠军, 专利]
+story_rule: label
+disable_rules: []
+extra_required: []

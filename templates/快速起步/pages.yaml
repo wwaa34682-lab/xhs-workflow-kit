@@ -1,0 +1,18 @@
+# 快速起步：第一篇草稿的首图文字（xhs.py quickstart 复制到 data/drafts/<ID>/pages.yaml）
+# {...} 从 brand.yaml 取已确认事实；没确认的事实会在图上显示“待业务确认”标记，确认前不能发布。
+# agent：按 steps/04 和风格锁把 title / subtitle 改成适合目标顾客的说法，事实只能用 {...} 引用。
+post_type: ""                # 第 4 步问过后写：转化帖 / 种草帖（第二篇默认沿用）
+copy_confirmed: ""           # 第 4 步：标题、正文、标签给用户看过后，照抄用户的确认原话（没确认不进第 5、6 步）
+cover_photo: ""              # 照片满版：首图照片放本稿件目录，写文件名（如 cover.jpg）；不改全局 layout.yaml
+cover_subject: ""            # 产品主体：产品抠图 PNG 放本稿件目录，写文件名
+faces: ""                    # 第 5 步：照片里的人脸按 face_policy 处理后写结果（无人脸 / P03 已打码 / 店主本人已授权）
+reference_feedback: ""       # 第 5 步：给用户看「参考图 | 成品」对比后，照抄用户原话（满意 / 要改哪里）
+cover:
+  title: 第一次来{brand.name}
+  subtitle: "{city} · {locations_count} 家门店可约"
+  headline: "{offer.0.name}"
+  offer: "**{offer.0.price_text}**"
+  cta: ""   # 评论关键词在第 4 步确认后再加
+  footnote: ""
+  brand: "{brand.name}"
+inner: []

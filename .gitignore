@@ -1,0 +1,40 @@
+# 私有数据：真实表格、原图、聚光导出、稿件、模拟结果——永远不要提交
+data/
+raw/
+demo_run/
+# 品牌事实默认不提交；团队私有仓库想共享可删掉下面两行
+config/brand.yaml
+config/layout.yaml
+# demo 渲染产物
+examples/demo/drafts/*/out*/
+# 字体文件（用 scripts/fetch_fonts.py 下载）
+fonts/*.ttf
+fonts/*.otf
+fonts/*.ttc
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+# 系统
+.DS_Store
+Thumbs.db
+# 根目录下的私有工作区（真实账号的收集、稿件、表格、导出、参考图）——demo 在 examples/ 下不受影响
+/inbox/
+/drafts/
+/tables/
+/exports/
+/photos/
+/refs/
+/sim/
+/out/
+out/
+*_orig.*
+# 凭据与密钥：永远不要提交
+.env
+.env.*
+*.pem
+*.key
+cookies*
+*cookie*.json
+secrets/

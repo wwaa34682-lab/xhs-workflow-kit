@@ -1,0 +1,21 @@
+# 【虚构示例】稿件 D001 的图上文字和照片。{...} 从 brand.yaml 取已确认事实，**...** = 数字字体强调
+cover:
+  title: 第一次上普拉提
+  subtitle: "{brand.name} · {city} {locations_count} 家门店可约 · 0 基础也能跟"
+  headline: 课程信息
+  offer: "0 基础新手，{offer.0.name} **{offer.0.price_text}**"
+  cta: "{locations_count} 家门店就近约，开启 **第一节课**"
+  footnote: "*每节{offer.0.duration}，含器械使用，提供防滑袜"
+  brand: "{brand.name}"
+inner:
+  - title: 先学呼吸和核心
+    photo: ../../photos/demo_01.jpg
+    photo_label: 教练示范呼吸（自有实拍）
+    caption: "原来呼吸也有讲究\n跟着节奏动起来"
+  - title: 第一次上器械
+    photo: ../../photos/demo_02.jpg
+    photo_label: 核心床练习（自有实拍）
+    caption: "有点抖，但是好上头"
+  - title: 打卡留影
+    photos: [../../photos/demo_03.jpg, ../../photos/demo_01.jpg, ../../photos/demo_02.jpg]
+    caption: "评论区扣「{content_rules.comment_keyword}」\n帮你约最近的门店"

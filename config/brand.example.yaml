@@ -1,0 +1,80 @@
+# 品牌配置（由 onboarding/开始使用.md 的问答填写）。复制为 config/brand.yaml 后修改。
+# 规则：只写业务方确认过的事实；不知道的保持 【待业务确认】，脚本和 agent 都不会替你编。
+# 必问事实清单见 config/required_facts.yaml：评审通过和发布前必须全部问清（硬闸门）。只有颜色、字体这类风格偏好可以先用默认值。
+industry: 【待业务确认】            # 行业，如 餐饮 / 咖啡茶饮 / 美业 / 医美 / 医疗 / 健身 / 教育培训 / 金融保险 / 零售产品 / 本地生活
+compliance:                        # 合规（config/compliance/）。医疗、医美、教育、金融自动加违禁句式、必带免责语、资质核对
+  profile: 【待业务确认】           # 通用 / 餐饮食品 / 医美 / 医疗 / 教育 / 金融
+  reviewer: ""                     # 受监管行业必填：合规审核人（发布前要过）
+  ad_review: ""                    # 医疗：医疗广告审查证明编号；没有就写“没有（不投流）”
+qualifications: []                 # 可以在帖子里说的资质原文（三甲、认证、执业许可……）；正文出现资质说法时必须在这里找到
+city: 【待业务确认】                # 主要城市（帖子和投流定向用）
+
+brand:
+  name: 【待业务确认】              # 品牌名（上图、正文用）
+  slogan: ""                       # 可选
+  colors:                          # 色值用 #RRGGBB
+    primary: "#2F6B4F"             # 品牌主色（占位）
+    accent: "#E8792B"              # 强调色/主体色（占位）
+    dark: "#1E2B24"                # 深色字
+    light: "#FFF8EC"               # 浅色底/描边
+  fonts:                           # 只用可商用字体。默认三款 SIL OFL 免费字体，见 fonts/README.md
+    dir: fonts
+    title:  {name: 站酷快乐体, file: ZCOOLKuaiLe-Regular.ttf}
+    body:   {name: 霞鹜文楷 Medium, file: LXGWWenKai-Medium.ttf}
+    number: {name: 得意黑, file: SmileySans-Oblique.ttf}
+
+offer:                             # 卖什么、多少钱。每一条都要业务确认
+  - name: 【待业务确认】            # 如 体验课 / 招牌套餐 / 首次护理
+    price_text: 【待业务确认】      # 上图口径，如「168元起/次」
+    duration: 【待业务确认】        # 时长 / 份量 / 规格（服务写时长，产品写份量或规格）
+    includes: []                   # 包含项，如 [含材料费, 提供工具]
+    validity: 【待业务确认】        # 有效期/使用限制
+    notes: ""
+
+locations:                         # 门店/网点；路线图节点按顺序取 short（没有就取 name）
+  - {name: 【待业务确认】, short: 【待业务确认】, address: ""}
+
+audience:
+  who: 【待业务确认】               # 目标人群，如 25-35 岁上班族女生
+  pains: []                        # 顾虑，如 [怕贵, 怕出糗, 没时间]
+  motives: []                      # 动机，如 [解压, 社交, 变美]
+
+accounts:                          # 发帖账号
+  - {name: 【待业务确认】, type: 【待业务确认】, role: 【待业务确认】, organic_traffic: 【待业务确认】}   # organic_traffic: 有 / 几乎没有
+
+juguang:                           # 聚光（小红书广告后台）
+  has: 【待业务确认】               # true / false；没有就只做自然流量回收
+  account_name: ""
+  lead_field: 【待业务确认】         # 留资口径列名；auto=依次找 私信留资数/留资数/表单提交数/线索数/表单预约数/到店数（有聚光时必须问）
+  min_spend_for_rank: 100          # 排名/分位数只用消费≥这个数的计划
+  min_impressions_for_ctr: 1000    # CTR 判定最少展现
+
+collection:                        # 第 1/2 步帖子怎么收集（onboarding 第 16 题）
+  mode: 【待业务确认】              # manual = A 手动提供（截图/文件/粘贴）；browser = B 专用小号自动搜集（需要能控制浏览器的 agent）
+  dedicated_account_note: ""       # 只写“用哪个小号”的描述，例如「运营组备用机上的小号」。不要写账号密码
+  is_main_account: false           # 必须是 false：绝不能用品牌主运营账号
+  user_accepts_platform_risk: false  # 用户确认接受小号可能被平台限制的风险后改为 true（mode=browser 时必须）
+  keywords: []                     # 搜索关键词，如 [城市+品类, 品类+新手, 场景词]
+  max_posts_per_session: 30        # 每次最多打开的帖子数
+  pause_seconds: [8, 20]           # 每个帖子之间随机停顿（秒）
+  bench_window_days: 365           # 对标筛选窗口（拆解模板 A0）
+  min_intent_users: 11             # 对标正式合格需要的不同意向用户数（拆解模板 A0）
+
+organic:                           # 没有聚光时用自然流量判效果
+  min_views_for_judge: 300         # 一篇帖子观看 ≥ 这个数才参与判定
+
+reviewer:                          # 专家评审人（人工关卡，必须是人）
+  name: 【待业务确认】
+  role: ""
+
+face_policy:                       # 照片里的人脸怎么处理
+  mode: 【待业务确认】              # keep_with_consent（有授权用原脸）/ ai_swap（AI换脸，须标注）/ sticker / blur
+  real_face_allowed_roles: []      # 允许用真脸的角色，如 [门店员工本人]；其他人按 mode 处理
+  ai_label_required: true          # 用了 AI 换脸/AI 生成画面 → 发布时勾选「含AI生成内容」
+
+content_rules:
+  scenario_label: "*本文为情景演绎"  # 虚构/改编的第一人称故事必须带
+  comment_keyword: 【待业务确认】    # 评论区留资关键词，如「想试」
+  banned_words: [100%, 必过, 保证, 最便宜, 无效退款]   # 通用安全底线，不是默认答案；行业违禁词要问用户补充
+  banned_words_confirmed: 【待业务确认】  # 用户看过上面的清单、补充完后改为 true
+  allowed_claims: []               # 有依据、可以讲的说法（资质、证书、效果、获奖）；都没有就写 [无]

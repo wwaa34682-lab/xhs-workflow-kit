@@ -1,0 +1,73 @@
+# 参考图改编参数（第 5 步）。agent 看完用户给的参考图（data/refs/<稿件ID>/）后，先填 reference 拆解，再把它落实成下面这些参数，按品牌改色、改字、改节点。
+# 示例模板类型：手绘涂鸦 + 巨物主体 + 路线节点的“探索地图”海报（3:4 竖图）。
+# 颜色可写 #RRGGBB，或 @名字 引用 palette，或 @primary/@accent/@dark/@light 引用 brand.yaml。
+template:
+  name: 探索地图海报（示例）
+reference:                     # 【虚构示例】参考图 data/refs/D001/ref_01.jpg 的拆解（清单见 templates/参考图拆解清单.md）
+  images: [ref_01.jpg]
+  breakdown:
+    版式: 3:4 竖图；上 1/3 放标题区，下 2/3 是一个巨大的圆形主体，大约占画面宽度的 110%，向两侧和底部出血；底部有一条横向波浪路线
+    字体: 虚构参考图用色块代替文字。标题是一整条白色粗圆角大字块，所以选圆润的粗手写体，白色、无描边、带柔和投影；主体上的信息是深色中号字块，用楷体感正文；价格这类数字单独放大，用倾斜粗体
+    调色: 满版蓝色渐变（上深下浅）；主体是暖粉红，和蓝底形成冷暖对比；路线是柠檬黄；整体高饱和、明亮。出图时另加纸纹肌理
+    主体: 一个巨大的圆形，左上方有柔和高光，位置居中偏下、向两侧出血；出图时用球体加笔刷质感
+    装饰: 顶部散落白色手绘星芒，出图时扩展成星星、闪光、云朵、爱心、螺旋，线条略抖动；路线上是白色描边圆点，出图时加编号
+    文字位置: 标题 y≈230、副标题 y≈390 在蓝底上；信息块（课程信息、价格、行动号召）压在主体上的 y≈660–930；品牌名在底部 y≈1356
+  kept: 满版蓝色底、白色手绘涂鸦、圆润手写标题、下半部巨大主体、波浪路线串起编号站点
+  changed: 主体颜色改成品牌强调色；站点改成本品牌门店；文字只用 brand.yaml 已确认的事实；压在主体上的字改为描边加投影（SL-G07）
+  iterations: []
+canvas: [1080, 1440]
+
+palette:
+  bg_top: "#1A82D0"
+  bg_bottom: "#3EAAE8"
+  subject: "@accent"
+  ink: "@dark"
+  paper: "@light"
+  highlight: "#FFE23C"
+  doodle: "#FFFFFF"
+
+styles:                       # 文字样式：fill 字色、stroke 描边色、stroke_width 描边粗细、shadow 柔和投影
+  on_bg_title: {fill: "@paper", stroke_width: 0, shadow: true, shadow_alpha: 0.3}
+  on_bg:       {fill: "@paper", stroke_width: 0, shadow: false}
+  on_subject:  {fill: "@ink", stroke: "@paper", stroke_width: 7, shadow: true}   # 风格锁：主体上的字用描边+投影
+  emphasis:    {fill: "@paper", stroke: "@ink", stroke_width: 6, shadow: true}   # 反相强调（价格等数字）
+  small:       {fill: "@ink", stroke: "@paper", stroke_width: 3, shadow: false}
+
+cover:
+  background: {type: gradient, top: "@bg_top", bottom: "@bg_bottom", texture: 0.6}   # type: gradient / solid(color) / image(path)
+  subject: {type: sphere, color: "@subject", center: [540, 1070], radius: 600, pattern: none, painterly: true}
+  # subject.type: sphere（球体；pattern: dimples 加凹坑纹）/ disc（扁平圆）/ image（产品抠图 PNG：path, width, center）/ none
+  doodles: {enabled: true, color: "@doodle", items: [star, sparkle, cloud, star, sparkle, heart, swirl, sparkle], zones: [[40, 40, 1040, 200]]}
+  route: {enabled: true, y: 1135, amplitude: 48, x_margin: 92, line: "@highlight", edge: "@paper", dot: "@ink",
+          label_style: on_subject, number: true, max_nodes: 8}
+  slots:                      # 文字槽位：内容写在 drafts/<ID>/pages.yaml 的 cover 下，同名
+    title:    {y: 230, font: title, size: 120, style: on_bg_title}
+    subtitle: {y: 392, font: body, size: 30, style: on_bg}
+    headline: {y: 660, font: title, size: 72, style: on_subject}
+    offer:    {y: 770, font: body, size: 42, style: on_subject, emph_font: number, emph_size: 70, emph_style: emphasis}
+    cta:      {y: 850, font: body, size: 42, style: on_subject, emph_font: number, emph_size: 50, emph_style: emphasis}
+    footnote: {y: 930, font: body, size: 25, style: small, align: right, x: 1000}
+    brand:    {y: 1356, font: body, size: 28, style: on_subject}
+
+inner:
+  background: {type: gradient, top: "@bg_top", bottom: "@bg_bottom", texture: 0.5}
+  doodles: {enabled: true, color: "@doodle", items: [sparkle, star, cloud], zones: [[40, 30, 1040, 120], [40, 1300, 1040, 1400]]}
+  frame: polaroid             # polaroid / rounded / none
+  photo_box: [90, 280, 990, 1200]
+  slots:
+    title:   {y: 120, font: title, size: 84, style: on_bg_title}
+    caption: {y: 1230, font: body, size: 40, style: on_bg, line_height: 56}
+
+variants:                     # A/B 套系：只写和主版不同的部分。render_post.py --variant B
+  B:
+    palette: {ink: "#FFFFFF", paper: "#1F2F5C"}
+    styles:
+      on_subject: {fill: "#FFFFFF", stroke: "#1F2F5C", stroke_width: 5, shadow: true}
+      emphasis:   {fill: "#FFFFFF", stroke: "#1F2F5C", stroke_width: 6, shadow: true}
+      on_bg:      {fill: "#FFFFFF", stroke_width: 0}
+      on_bg_title: {fill: "#FFFFFF", stroke_width: 0, shadow: true}
+  C:
+    palette: {bg_top: "#FFF6E6", bottom: "#FFF6E6", bg_bottom: "#FBEBD3", doodle: "@dark"}
+    styles:
+      on_bg_title: {fill: "@accent", stroke_width: 0, shadow: false}
+      on_bg:       {fill: "@dark", stroke_width: 0}

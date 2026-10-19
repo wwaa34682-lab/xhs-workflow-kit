@@ -1,0 +1,63 @@
+# 每一步必须问清楚的事实（硬闸门）。
+# - xhs.py status/next：走到某一步时，按 ask 原文、带 options 选项，一次问一个缺的事实（即时追问）。
+# - ledger.py review --verdict 通过 / ledger.py queue --status 已发布|投流中|已复盘：gates 里列出的事实有任何一项缺失
+#   或是【待业务确认】，就拒绝通过，并打印缺哪几项。
+# - 这里的事实都是业务事实，不允许默认值。只有风格偏好（品牌色、字体、版式）可以先用默认值。
+# check 的写法：filled = 非空且不含【待业务确认】；list = 至少 1 项；bool = 必须明确写 true 或 false；true = 必须是 true；false = 必须是 false
+# when：只有条件成立时才检查（写法：键 == 值）
+# label：给用户看的白话名字（xhs.py status / card 用它，不露字段名）
+# 合规包（config/compliance/*.yaml）的 extra_required 默认在第 4 步问；写了 step: 0 的在建档时问
+# 同一步缺 2 项以上时，xhs.py card 把它们列成一张确认卡一次核对（预填只能来自用户原话）
+steps:
+  0:
+    name: 建档·快速通道
+    facts:
+      - {key: industry, label: 行业, ask: 你们是什么行业？, options: [餐饮, 咖啡茶饮, 美业（生活美容）, 医美, 医疗（诊所、口腔、体检）, 健身, 教育培训, 金融保险, 零售产品, 本地生活, 其他（请说明）]}
+      - {key: compliance.profile, label: 合规规则, ask: （agent 按行业选，向用户复述一句确认）用哪个合规起步包？, options: [通用, 餐饮食品, 医美, 医疗, 教育, 金融]}
+      - {key: brand.name, label: 品牌名写法, ask: 品牌名叫什么？图上和正文里怎么写？, options: [带后缀（比如“XX 工作室”）, 不带后缀]}
+      - {key: offer.0.name, label: 主推产品, ask: 这次主推什么产品或服务？}
+      - {key: offer.0.price_text, label: 价格口径, ask: 价格怎么写？要具体到口径（起价 / 每次 / 每份 / 套餐）, options: ["X元起/次", "X元/份", "双人套餐 X 元", 其他口径]}
+      - {key: city, label: 城市, ask: 主要在哪个城市做生意、投流？}
+      - {key: locations.0.name, label: 门店名, ask: 有几家门店或网点？名字怎么写？按什么顺序？}
+      - {key: audience.who, label: 目标顾客, ask: 目标顾客是谁？, options: [上班族, 学生, 宝妈, 银发, 其他（请说明年龄段和身份）]}
+      - {key: juguang.has, label: 有没有聚光, check: bool, ask: 有没有开通聚光？（聚光 = 小红书的付费推广后台，花钱让更多人看到帖子）, options: [有, 没有（后面用自然流量数据判断效果，一样能走完）]}
+  1:
+    name: 对标帖拆解
+    facts:
+      - {key: collection.mode, label: 帖子收集方式, ask: 对标帖和自有帖怎么收集？, options: ["A 手动提供（你发截图、图片、正文）", "B 专用小号自动搜集（需要你提供专门的研究小号，登录和验证由你本人完成）"]}
+      - {key: collection.is_main_account, label: 研究小号不是主号, check: false, when: collection.mode == browser, ask: 确认这个小号不是品牌主运营账号？, options: [确认不是主运营号, 是主运营号（不能用，改用 A）]}
+      - {key: collection.user_accepts_platform_risk, label: 接受小号风险, check: true, when: collection.mode == browser, ask: 小号可能被平台限流、要求验证或封号，你接受这个风险吗？, options: [接受, 不接受（改用 A）]}
+      - {key: collection.keywords, label: 搜索关键词, check: list, when: collection.mode == browser, ask: 用哪些关键词搜索？, options: [城市+品类, 品类+新手, 场景词]}
+  4:
+    name: 出文案
+    facts:
+      - {key: offer.0.duration, label: 时长/份量, ask: 时长、份量或规格是多少？（服务写时长，产品写份量/规格）, options: ["X 分钟/次", "X ml/杯", "X 克/份", 不限时]}
+      - {key: offer.0.includes, label: 价格包含什么, check: list, ask: 价格里包含什么？（一条一条说；什么都不含就说“不含其他项目”）}
+      - {key: offer.0.validity, label: 有效期/使用限制, ask: 有效期或使用限制是什么？, options: [购买后 X 天内有效, 仅限新客, 仅工作日, 没有限制]}
+      - {key: audience.pains, label: 顾客最担心什么, check: list, ask: 目标顾客最担心什么？可以多选, options: [怕贵, 怕尴尬, 没时间, 怕没效果, 其他]}
+      - {key: content_rules.comment_keyword, label: 评论区关键词, ask: 评论区留资关键词用什么？（2–4 个字）, options: [想试, 想了解, 要攻略, 自定义]}
+      - {key: content_rules.allowed_claims, label: 能讲的有依据说法, check: list, ask: 哪些说法可以讲、有依据？（资质、证书、效果、获奖；都没有就说“无”）}
+      - {key: content_rules.banned_words_confirmed, label: 不能说的词, check: true, ask: 这些是不能说的词：<列出 banned_words>。还要加行业里的违禁词或不能做的承诺吗？, options: [就这些, 再加几个（请列出）]}
+  5:
+    name: 出图
+    facts:
+      - {key: face_policy.mode, label: 人脸怎么处理, ask: 照片里有顾客或员工的脸，怎么处理？, options: ["有授权就用原脸（keep_with_consent）", "AI 换脸，发布时必须标注 AI（ai_swap）", "贴纸遮挡（sticker）", "打码（blur）"]}
+      - {key: face_policy.real_face_allowed_roles, label: 谁能用真脸, check: list, ask: 哪些人可以用真脸？（都不可以就说“无”）, options: [门店员工本人, 签了授权的顾客, 无]}
+  6:
+    name: 专家评审
+    facts:
+      - {key: reviewer.name, label: 专家评审人, ask: 谁来当专家评审？以谁的意见为准？（必须是人）, options: [老板本人, 品牌负责人, 运营负责人, 其他（请说明）]}
+  7:
+    name: 发布
+    facts:
+      - {key: accounts.0.name, label: 发帖账号, ask: 用哪个小红书账号发？}
+      - {key: accounts.0.type, label: 账号类型, ask: 账号是哪种？（在小红书“我”→“设置”里能看到）, options: [个人号（普通账号）, 专业号（开通了专业身份）, 企业号（有营业执照认证、蓝 V）]}
+      - {key: accounts.0.organic_traffic, label: 账号自然流量, ask: 这个账号的自然流量大概怎么样？, options: [有一定自然流量, 几乎没有]}
+  8:
+    name: 数据回收
+    facts:
+      - {key: juguang.account_name, label: 聚光账户名, when: juguang.has == true, ask: 聚光账户叫什么？（导出文件对得上就行）}
+      - {key: juguang.lead_field, label: 留资看哪一列, when: juguang.has == true, ask: 你们把哪种算“有人想来”？（导出表里对应哪一列）, options: [私信留资数, 表单提交数, 表单预约数, 到店数/到院数, auto（让脚本自动识别，并把识别到的列告诉你确认）]}
+gates:
+  review: [0, 4, 5, 6]        # 专家评审“通过”之前必须齐
+  publish: [0, 4, 5, 6, 7]    # 发布 / 投流之前必须齐

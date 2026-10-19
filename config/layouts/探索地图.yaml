@@ -1,0 +1,72 @@
+# 预设：探索地图（满版底 + 巨物主体 + 门店路线）。适合参考图本身就是这种“地图海报”风格时用。
+# 参考图改编参数（第 5 步）。agent 看完用户给的参考图（data/refs/<稿件ID>/）后，先填 reference 拆解，再把它落实成下面这些参数，按品牌改色、改字、改节点。
+# 示例模板类型：手绘涂鸦 + 巨物主体 + 路线节点的“探索地图”海报（3:4 竖图）。
+# 颜色可写 #RRGGBB，或 @名字 引用 palette，或 @primary/@accent/@dark/@light 引用 brand.yaml。
+template:
+  name: 探索地图海报（示例参数，按你的参考图改）
+reference:                     # 参考图拆解（硬规则：没填完 render_post.py 不出图）。清单见 templates/参考图拆解清单.md
+  images: []                   # 参考图放 data/refs/<稿件ID>/，这里列文件名，如 [ref_01.jpg]。只作参考，不进成品，不商用原图
+  breakdown:
+    版式: 【待拆解】
+    字体: 【待拆解】
+    调色: 【待拆解】
+    主体: 【待拆解】
+    装饰: 【待拆解】
+    文字位置: 【待拆解】
+  kept: 【待拆解】              # 保留了参考图的什么
+  changed: 【待拆解】           # 按本品牌改了什么（颜色、主体、节点、文字、照片）
+  iterations: []               # 每轮用户反馈和对应改动：- {round: 1, feedback: "原话", change: "改了什么"}
+canvas: [1080, 1440]
+
+palette:
+  bg_top: "#1A82D0"
+  bg_bottom: "#3EAAE8"
+  subject: "@accent"
+  ink: "@dark"
+  paper: "@light"
+  highlight: "#FFE23C"
+  doodle: "#FFFFFF"
+
+styles:                       # 文字样式：fill 字色、stroke 描边色、stroke_width 描边粗细、shadow 柔和投影
+  on_bg_title: {fill: "@paper", stroke_width: 0, shadow: true, shadow_alpha: 0.3}
+  on_bg:       {fill: "@paper", stroke_width: 0, shadow: false}
+  on_subject:  {fill: "@ink", stroke: "@paper", stroke_width: 7, shadow: true}   # 风格锁：主体上的字用描边+投影
+  emphasis:    {fill: "@paper", stroke: "@ink", stroke_width: 6, shadow: true}   # 反相强调（价格等数字）
+  small:       {fill: "@ink", stroke: "@paper", stroke_width: 3, shadow: false}
+
+cover:
+  background: {type: gradient, top: "@bg_top", bottom: "@bg_bottom", texture: 0.6}   # type: gradient / solid(color) / image(path)
+  subject: {type: sphere, color: "@subject", center: [540, 1070], radius: 600, pattern: none, painterly: true}
+  # subject.type: sphere（球体；pattern: dimples 加凹坑纹）/ disc（扁平圆）/ image（产品抠图 PNG：path, width, center）/ none
+  doodles: {enabled: true, color: "@doodle", items: [star, sparkle, cloud, star, sparkle, heart, swirl, sparkle], zones: [[40, 40, 1040, 200]]}
+  route: {enabled: true, y: 1135, amplitude: 48, x_margin: 92, line: "@highlight", edge: "@paper", dot: "@ink",
+          label_style: on_subject, number: true, max_nodes: 8, labels: up, single: pin}   # labels: up 节点名统一朝上；只有 1 家店时画定位针
+  slots:                      # 文字槽位：内容写在 drafts/<ID>/pages.yaml 的 cover 下，同名
+    title:    {y: 230, font: title, size: 120, style: on_bg_title}
+    subtitle: {y: 392, font: body, size: 30, style: on_bg}
+    headline: {y: 660, font: title, size: 72, style: on_subject}
+    offer:    {y: 770, font: body, size: 42, style: on_subject, emph_font: number, emph_size: 46, emph_style: emphasis}   # 价格不放大（SL-G14）
+    cta:      {y: 850, font: body, size: 42, style: on_subject, emph_font: number, emph_size: 50, emph_style: emphasis}
+    footnote: {y: 930, font: body, size: 25, style: small, align: right, x: 1000}
+    brand:    {y: 1356, font: body, size: 28, style: on_subject}
+
+inner:
+  background: {type: gradient, top: "@bg_top", bottom: "@bg_bottom", texture: 0.5}
+  doodles: {enabled: true, color: "@doodle", items: [sparkle, star, cloud], zones: [[40, 30, 1040, 120], [40, 1300, 1040, 1400]]}
+  frame: polaroid             # polaroid / rounded / none
+  photo_box: [90, 280, 990, 1200]
+  slots:
+    title:   {y: 120, font: title, size: 84, style: on_bg_title}
+    caption: {y: 1230, font: body, size: 40, style: on_bg, line_height: 56}
+
+variants:                     # A/B 套系：只写和主版不同的部分。render_post.py --variant B
+  B:                          # 一次只改一个变量：这里只换背景色系（蓝 → 暖米色），主体、文字、版式都不动
+    palette: {bg_top: "#FFF3E2", bg_bottom: "#F6DDBE", doodle: "@dark"}
+    styles:
+      on_bg_title: {fill: "@dark", stroke_width: 0, shadow: false}
+      on_bg:       {fill: "@dark", stroke_width: 0}
+  C:
+    palette: {bg_top: "#FFF6E6", bg_bottom: "#FBEBD3", doodle: "@dark"}
+    styles:
+      on_bg_title: {fill: "@accent", stroke_width: 0, shadow: false}
+      on_bg:       {fill: "@dark", stroke_width: 0}

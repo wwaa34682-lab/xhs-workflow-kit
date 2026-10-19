@@ -1,0 +1,29 @@
+# 【虚构示例】美业行业 · 名字、价格、门店都是编的
+industry: 美业（美甲）
+compliance: {profile: 通用}
+city: 示例市
+brand:
+  name: 栗子美甲工作室（虚构）
+  colors: {primary: "#B5476B", accent: "#F4B6C2", dark: "#3A2230", light: "#FFF7F8"}
+  fonts:
+    dir: fonts
+    title:  {name: 站酷快乐体, file: ZCOOLKuaiLe-Regular.ttf}
+    body:   {name: 霞鹜文楷 Medium, file: LXGWWenKai-Medium.ttf}
+    number: {name: 得意黑, file: SmileySans-Oblique.ttf}
+offer:
+  - name: 秋冬纯色款
+    price_text: 128元起/次
+    duration: 约 90 分钟
+    includes: [含修型, 含死皮处理]
+    validity: 【待业务确认】
+locations:
+  - {name: 万象店, short: 万象店}
+  - {name: 樱花里店, short: 樱花里店}
+audience: {who: 22-32 岁学生和白领, pains: [怕做完不好看, 怕被推销办卡], motives: [约会, 拍照]}
+accounts: [{name: 栗子美甲（虚构）, type: 个人号, role: 种草, organic_traffic: 有}]
+juguang: {has: true, account_name: 虚构账户, lead_field: 私信留资数, min_spend_for_rank: 100, min_impressions_for_ctr: 1000}
+collection: {mode: manual, dedicated_account_note: "", is_main_account: false, user_accepts_platform_risk: false, keywords: [示例市美甲, 秋冬美甲, 美甲新款], max_posts_per_session: 30, pause_seconds: [8, 20], bench_window_days: 365, min_intent_users: 11}
+reviewer: {name: 示例店长（虚构）, role: 主理人}
+face_policy: {mode: keep_with_consent, real_face_allowed_roles: [美甲师本人, 已签授权的顾客], ai_label_required: true}
+content_rules: {scenario_label: "*本文为情景演绎", comment_keyword: 求同款, banned_words: [永不掉, 保证, 最便宜], banned_words_confirmed: true, allowed_claims: [无]}
+# 模板改编建议：subject 用 {type: disc, color: "@accent"} 当“色卡圆”，inner frame: rounded 放手部特写（只拍手，不涉及人脸）。

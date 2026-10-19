@@ -1,0 +1,16 @@
+name: 金融与保险（理财、贷款、保险、财税咨询）
+regulated: true
+banned: [100%, 保证, 保本, 保收益, 稳赚, 零风险, 无风险, 高收益, 秒批, 秒到, 无抵押, 无门槛, 包下款, 内部渠道, 最低利率, 第一品牌]
+allow: [第一次, 第一步]
+banned_patterns:
+  - '(?:年化|收益|回报)\s*\d+(?:\.\d+)?\s*%'
+  - '\d+\s*(?:分钟|小时)\s*(?:到账|下款|审批)'
+  - '(?:稳|必|一定)(?:赚|涨|赢)'
+  - '(?:客户|用户)(?:说|反馈|赚了)'
+required_disclaimers: ['市场有风险，投资需谨慎']
+qualification_terms: [持牌, 牌照, 许可证, 备案, 银行, 保险公司, 认证, 官方, 授权]
+story_rule: 'off'
+disable_rules: [SL-G10, SL-G15]
+extra_required:
+  - {key: qualifications, check: list, ask: 有哪些牌照或备案可以说？请给原文，都不说就回“无”}
+  - {key: compliance.reviewer, ask: 谁来做合规审核？, options: [合规负责人, 外部合规顾问, 其他（请说明）]}

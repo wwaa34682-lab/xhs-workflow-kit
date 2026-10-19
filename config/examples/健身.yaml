@@ -1,0 +1,34 @@
+# 【虚构示例】健身行业 · 所有名字、价格、门店都是编的，只用于跑通 demo
+industry: 健身（普拉提）
+compliance: {profile: 通用}
+city: 示例市
+brand:
+  name: 跃动普拉提（虚构）
+  slogan: 动一动，心情会变好
+  colors: {primary: "#2F7A6B", accent: "#F06A4E", dark: "#1F2D3A", light: "#FFF8EE"}
+  fonts:
+    dir: fonts
+    title:  {name: 站酷快乐体, file: ZCOOLKuaiLe-Regular.ttf}
+    body:   {name: 霞鹜文楷 Medium, file: LXGWWenKai-Medium.ttf}
+    number: {name: 得意黑, file: SmileySans-Oblique.ttf}
+offer:
+  - name: 器械体验课
+    price_text: 99元起/节
+    duration: 50分钟
+    includes: [含器械使用, 提供防滑袜, 小班 4 人以内]
+    validity: 购买后 30 天内有效
+    notes: 虚构
+locations:
+  - {name: 梧桐店, short: 梧桐店}
+  - {name: 河畔店, short: 河畔店}
+  - {name: 星光店, short: 星光店}
+  - {name: 云杉店, short: 云杉店}
+  - {name: 晴川店, short: 晴川店}
+audience: {who: 25-35 岁久坐上班族, pains: [怕跟不上, 怕贵, 身体僵硬], motives: [改善体态, 解压]}
+accounts:
+  - {name: 跃动普拉提（虚构）, type: 专业号, role: 转化, organic_traffic: 几乎没有}
+juguang: {has: true, account_name: 虚构演示账户, lead_field: auto, min_spend_for_rank: 100, min_impressions_for_ctr: 1000}
+collection: {mode: manual, dedicated_account_note: "", is_main_account: false, user_accepts_platform_risk: false, keywords: [示例市普拉提, 普拉提新手, 下班去哪儿], max_posts_per_session: 30, pause_seconds: [8, 20], bench_window_days: 365, min_intent_users: 11}
+reviewer: {name: 示例店长（虚构）, role: 品牌负责人}
+face_policy: {mode: ai_swap, real_face_allowed_roles: [门店教练本人], ai_label_required: true}
+content_rules: {scenario_label: "*本文为情景演绎", comment_keyword: 想试, banned_words: [100%, 必瘦, 保证, 最便宜], banned_words_confirmed: true, allowed_claims: [无]}
