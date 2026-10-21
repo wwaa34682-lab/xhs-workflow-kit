@@ -113,3 +113,6 @@ data/  （自己创建，已被 .gitignore 排除）              你的真实�
 
 ## 许可
 代码和文档：MIT（见 `LICENSE`）。字体不随仓库分发，各自按 SIL OFL 1.1 许可（见 `fonts/README.md`）。
+
+## 相关工具
+- [xhs-link-teardown](https://github.com/wwaa34682-lab/xhs-link-teardown)：贴小红书链接 → 自动抓取 → 按模板拆解 → 写入对标库。
